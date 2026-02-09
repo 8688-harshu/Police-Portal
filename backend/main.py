@@ -34,6 +34,15 @@ class SafetyReport(BaseModel):
     description: Optional[str] = None
     timestamp: str
 
+@app.get("/")
+def read_root():
+    return {
+        "status": "ok",
+        "message": "Welcome to SafeRoute Police Portal Backend",
+        "docs": "/docs",
+        "health": "/api/health"
+    }
+
 @app.get("/api/health")
 def health_check():
     return {"status": "ok", "message": "SafeRoute Backend is Running"}
