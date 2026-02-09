@@ -25,22 +25,33 @@ class FirebaseService:
                 print(f"Maps Client Init Error: {e}")
 
         # Try to initialize Firebase
-        if os.path.exists(CRED_PATH):
+        cred = None
+        if os.getenv("FIREBASE_CREDENTIALS"):
+            try:
+                cred_json = json.loads(os.getenv("FIREBASE_CREDENTIALS"))
+                cred = credentials.Certificate(cred_json)
+                print("✅ Loaded Firebase Credentials from Environment Variable")
+            except Exception as e:
+                print(f"⚠️ Error parsing FIREBASE_CREDENTIALS: {e}")
+
+        if not cred and os.path.exists(CRED_PATH):
             try:
                 cred = credentials.Certificate(CRED_PATH)
+                print("✅ Loaded Firebase Credentials from File")
+            except Exception as e:
+                print(f"⚠️ Error reading serviceAccountKey.json: {e}")
+
+        if cred:
+            try:
                 firebase_admin.initialize_app(cred)
                 self.db = firestore.client()
                 self.use_local = False
                 print("✅ Firebase Connected Successfully")
             except Exception as e:
-                print(f"⚠️ Firebase Init Error: {e}")
-                print("\n" + "!"*50)
-                print("CRITICAL WARNING: Running in Demo Mode.")
-                print("Firebase failed to init. Data will NOT be saved to the cloud.")
-                print("!"*50 + "\n")
+                 print(f"⚠️ Firebase Init Error: {e}")
         else:
             print("\n" + "!"*50)
-            print("CRITICAL WARNING: serviceAccountKey.json is MISSING.")
+            print("CRITICAL WARNING: No Valid Firebase Credentials Found (Env or File).")
             print("Running in Demo Mode. Data will NOT be saved to the cloud.")
             print("!"*50 + "\n")
 
