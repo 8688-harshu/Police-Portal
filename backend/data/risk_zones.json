@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Dhoolpet",
+        "lat": 17.3688,
+        "lng": 78.4578,
+        "radius_km": 1.5,
+        "risk_level": "HIGH",
+        "reason": "High crime history reported",
+        "lighting": "POOR"
+    },
+    {
+        "name": "Isolated Industrial Area (Jeedimetla)",
+        "lat": 17.5186,
+        "lng": 78.4682,
+        "radius_km": 2.0,
+        "risk_level": "HIGH",
+        "reason": "Industrial zone, very isolated at night",
+        "lighting": "NONE"
+    },
+    {
+        "name": "Necklace Road (Late Night)",
+        "lat": 17.4265,
+        "lng": 78.4752,
+        "radius_km": 0.5,
+        "risk_level": "MEDIUM",
+        "reason": "Low crowd presence post 11 PM",
+        "lighting": "GOOD"
+    },
+    {
+        "name": "Vijayawada Highway Crossing",
+        "lat": 16.5062,
+        "lng": 80.6480,
+        "radius_km": 5.0,
+        "risk_level": "HIGH",
+        "reason": "Accident prone zone & frequent robberies at night",
+        "lighting": "POOR"
+    }
+]
